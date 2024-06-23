@@ -1,4 +1,3 @@
-
 import string
 import random
 from django.conf import settings
@@ -45,4 +44,4 @@ def sslcommerz_payment_gateway(request, number, id, amount, email):
     response = sslcommez.createSession(post_body)
     # print(response)
     # return JsonResponse(response)
-    return 'https://sandbox.sslcommerz.com/gwprocess/v4/gw.php?Q=pay&SESSIONKEY=' + response["sessionkey"]
+    return 'https://sandbox.sslcommerz.com/gwprocess/v3/gw.php?Q=pay&SESSIONKEY=' + response["sessionkey"]
