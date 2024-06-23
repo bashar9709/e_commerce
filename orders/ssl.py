@@ -1,3 +1,4 @@
+
 import string
 import random
 from django.conf import settings
@@ -12,8 +13,6 @@ def unique_trangection_id_generator(size=10, chars=string.ascii_uppercase + stri
 @login_required  # Apply the login_required decorator to ensure the user is logged in
 def sslcommerz_payment_gateway(request, number, id, amount, email):
     gateway_auth_details = PaymentGatewaySettings.objects.all().first()
-    if gateway_auth_details is None:
-        raise ValueError("Gateway authentication details not found")
     settings = {'store_id': gateway_auth_details.store_id,
                 'store_pass': gateway_auth_details.store_pass, 'issandbox': True}
 
@@ -46,4 +45,4 @@ def sslcommerz_payment_gateway(request, number, id, amount, email):
     response = sslcommez.createSession(post_body)
     # print(response)
     # return JsonResponse(response)
-    return 'https://sandbox.sslcommerz.com/gwprocess/v4/api.php?Q=pay&SESSIONKEY=' + response["sessionkey"]
+    return 'https://sandbox.sslcommerz.com/gwprocess/v4/gw.php?Q=pay&SESSIONKEY=' + response["sessionkey"]
